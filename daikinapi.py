@@ -94,10 +94,10 @@ class Daikin:
         """
         Example (ex=False):
         ret=OK,today_runtime=601,datas=0/0/0/0/0/0/1000
-            (datas: values in Watt/hour, last day last)
+            (datas: values in Watt*hour, last day last)
         Example (ex=True):
         ret=OK,s_dayw=2,week_heat=10/0/0/0/0/0/0/0/0/0/0/0/0/0,week_cool=0/0/0/0/0/0/0/0/0/0/0/0/0/0
-            (week_*: values in 100Watt/hour, last day first)
+            (week_*: values in 100Watt*hour, last day first)
         Probably 'ex' refers to "exclusively this device"
         :return: dict
         """
@@ -107,10 +107,10 @@ class Daikin:
         """
         Example (ex=False):
         ret=OK,previous_year=0/0/0/0/0/0/0/0/0/0/0/0,this_year=0/0/0/0/0/0/0/0/0/1
-            (*_year: values in 100Watt/hour per month (jan-dec))
+            (*_year: values in 100Watt*hour per month (jan-dec))
         Example (ex=True):
         ret=OK,curr_year_heat=0/0/0/0/0/0/0/0/0/0/0/1,prev_year_heat=0/0/0/0/0/0/0/0/0/0/0/0,curr_year_cool=0/0/0/0/0/0/0/0/0/0/0/0,prev_year_cool=0/0/0/0/0/0/0/0/0/0/0/0
-            (*_year_*: values in 100Watt/hour per month (jan-dec))
+            (*_year_*: values in 100Watt*hour per month (jan-dec))
         Probably 'ex' refers to "exclusively this device"
         :return: dict
         """
@@ -374,11 +374,11 @@ class Daikin:
 
     def today_energy_consumption_ex(self, ex=True, mode="heat"):
         """
-        unit energy consumption today (in Watt/hour)
+        unit energy consumption today (in Watt*hour)
         :param ex: boolean indicating whether to take form '_ex'
             Probably 'ex' refers to "exclusively this device"
         :param mode: string from ("heat", "cool") describing mode of operation; ignored if ex==False
-        :return: Watt/hour of energy consumption
+        :return: Watt*hour of energy consumption
         """
         assert not ex or mode in ("heat", "cool"), 'mode should be from ("heat", "cool") if ex==True'
         res = self._get_week(ex=ex)
@@ -390,8 +390,8 @@ class Daikin:
     @property
     def today_energy_consumption(self, ex=False):
         """
-        unit energy consumption today (in Watt/hour)
-        :return: Watt/hour of energy consumption
+        unit energy consumption today (in Watt*hour)
+        :return: Watt*hour of energy consumption
         """
         return self.today_energy_consumption_ex(ex=ex, mode=None)
 
